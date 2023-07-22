@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\City;
 use App\Models\Role;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -80,6 +81,16 @@ class DatabaseSeeder extends Seeder
         //     'slug'=>'sifat-hossain',
         //     'email'=>'sifat@test.com',
         //     'password'=> bcrypt('sifat123'),
+        // ]);
+
+        // Tag::create([
+        //     'name' => 'Laravel'
+        // ]);
+        // Tag::create([
+        //     'name' => 'PHP'
+        // ]);
+        // Tag::create([
+        //     'name' => 'HTML'
         // ]);
     }
 }

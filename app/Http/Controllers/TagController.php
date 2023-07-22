@@ -12,7 +12,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::get();
+        return view('admin.tag.index')->with([
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -28,7 +31,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tag::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect(route('tag.index'));
     }
 
     /**
@@ -44,7 +51,9 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tag.edit')->with([
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -52,7 +61,11 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        // dd($request->name);
+        $tag->update([
+            'name' => $request->name,
+        ]);
+        return redirect(route('tag.index'));
     }
 
     /**
