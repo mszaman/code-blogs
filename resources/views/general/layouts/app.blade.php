@@ -8,8 +8,12 @@
     <title>Code Blogs</title>
 </head>
 <body>
-    @include('layouts.navbar')
-    @yield('content')
+    @include('general.layouts.navbar')
+    <main class="main-section">
+        <div class="main-wrapper">
+            @yield('content')
+        </div>
+    </main>
 
     <script src="{{ asset('js/jquery-3.7.0.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>

@@ -4,15 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Spatie\Sluggable\HasSlug;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Sluggable\SlugOptions;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUlids;
+    use HasApiTokens, HasFactory, Notifiable, HasUlids, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -47,4 +50,32 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // Relation with Role model
+    public function role() : BelongsTo {
+        return $this->belongsTo(Role::class);
+    }
+
+
+    // composer require spatie/laravel-sluggable
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['first_name','last_name'])
+            ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
