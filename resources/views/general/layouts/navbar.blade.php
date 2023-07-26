@@ -12,7 +12,7 @@
                 >
             </li>
             <li class="nav-list">
-              <a href="" class="nav-link">profile</a>
+              <a href="{{ route('user.show', Auth::user()->slug) }}" class="nav-link">profile</a>
             </li>
         @endauth
         <li class="nav-list">

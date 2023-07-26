@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -55,6 +57,16 @@ class User extends Authenticatable
     // Relation with Role model
     public function role() : BelongsTo {
         return $this->belongsTo(Role::class);
+    }
+
+    // Relation with Contact model
+    public function contact() : HasOne {
+        return $this->hasOne(Contact::class);
+    }
+
+    // Relation with Image model
+    public function image() : MorphOne {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 

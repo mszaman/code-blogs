@@ -2,17 +2,19 @@
 
 @section('content')
 <aside class="card profile-info">
-    <img src="../res/profile-image.jpg" alt="" class="profile-image" />
+    <img src="{{ asset('storage/avatars/'.$image) }}" alt="" class="profile-image" />
+
     <h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
     <ul class="profile-info-lists">
         <li>{{ $user->role->name }}</li>
+        <li>{{ $user->contact->phone ?? '' }}</li>
         <li>Joined on {{ $user->created_at }}</li>
         <li>{{ $user->email }}</li>
         <li>Dhaka, Bangladesh</li>
     </ul>
 <div class="profile-info-buttons">
     <a
-    href="../pages/edit-profile.html"
+    href="{{ route('user.edit', $user->slug) }}"
     class="btn btn--edit btn--profile--edit"
     >Edit Profile</a
     >

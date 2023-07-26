@@ -23,7 +23,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td class="action-cell">
-                        <a href="{{ route('user.show', $user->id) }}" class="btn btn--view"
+                        <a href="{{ route('user.show', $user->slug) }}" class="btn btn--view"
                         >View</a
                         >
                         <a

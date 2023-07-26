@@ -33,7 +33,9 @@ Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admi
 
 // User Routes
 Route::get('user/index', [UserController::class, 'index'])->name('user.index');
+Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::get('user/{user}', [UserController::class, 'show'])->name('user.show');
+Route::patch('user/{user}', [UserController::class, 'update'])->name('user.update');
 
 // Post Routes
 Route::get('post/create', [PostController::class, 'create'])->name('post.create');
