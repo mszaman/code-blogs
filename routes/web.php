@@ -38,8 +38,11 @@ Route::get('user/{user}', [UserController::class, 'show'])->name('user.show');
 Route::patch('user/{user}', [UserController::class, 'update'])->name('user.update');
 
 // Post Routes
+Route::get('post/index', [PostController::class, 'index'])->name('post.index');
 Route::get('post/create', [PostController::class, 'create'])->name('post.create');
 Route::post('post/store', [PostController::class, 'store'])->name('post.store');
+
+Route::get('admin/post/index', [PostController::class, 'adminIndex'])->name('admin.post.index');
 
 // Tag Routes
 Route::get('tag/index',[TagController::class, 'index'])->name('tag.index');
@@ -48,4 +51,4 @@ Route::post('tag/store',[TagController::class, 'store'])->name('tag.store');
 Route::get('tag/{tag}/edit',[TagController::class, 'edit'])->name('tag.edit');
 Route::patch('tag/{tag}',[TagController::class, 'update'])->name('tag.update');
 
-Route::get('tag/tags', [TagController::class, 'tagsIndex'])->name('general.tag.index');
+Route::get('admin/tag/tags', [TagController::class, 'adminIndex'])->name('admin.tag.index');

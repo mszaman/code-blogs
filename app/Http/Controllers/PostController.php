@@ -15,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('user', 'tags', 'image')->get();
+
+        return view('general.post.index')->with([
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -41,7 +45,7 @@ class PostController extends Controller
         ]);
 
         // Validate tags passed from user's input form
-        $$request->validate([
+        $request->validate([
             'names' => ['required'],
         ]);
 
@@ -107,5 +111,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function adminIndex() {
+        $posts = Post::with('tags')->get();
+
+        return view('admin.post.index')->with([
+            'posts' => $posts,
+        ]);
     }
 }

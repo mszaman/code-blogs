@@ -13,7 +13,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::get();
-        return view('admin.tag.index')->with([
+        return view('general.tag.index')->with([
             'tags' => $tags,
         ]);
     }
@@ -77,10 +77,10 @@ class TagController extends Controller
     }
 
     // Tags for general tag page
-    public function tagsIndex() {
+    public function adminIndex() {
         $tags = Tag::get();
 
-        return view('general.tag.index')->with([
+        return view('admin.tag.index')->with([
             'tags' => $tags,
         ]);
     }

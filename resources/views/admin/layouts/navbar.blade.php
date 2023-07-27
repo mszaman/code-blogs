@@ -33,12 +33,12 @@
             >
         </li>
         <li class="nav-list">
-            <a class="nav-link" href="{{ route('tag.index') }}"
+            <a class="nav-link" href="{{ route('admin.tag.index') }}"
             >tags</a
             >
         </li>
         <li class="nav-list">
-            <a class="nav-link" href="../../pages/dashboard/index-post.html"
+            <a class="nav-link" href="{{ route('admin.post.index') }}"
             >posts</a
             >
         </li>

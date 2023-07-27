@@ -7,15 +7,15 @@
         <div class="summary-body">
             <div class="summary-card">
             <p class="summary-card-title">users</p>
-            <p class="summary-card-body">20</p>
+            <p class="summary-card-body">{{ $totalUsers }}</p>
             </div>
             <div class="summary-card">
             <p class="summary-card-title">posts</p>
-            <p class="summary-card-body">200</p>
+            <p class="summary-card-body">{{ $totalPosts }}</p>
             </div>
             <div class="summary-card">
             <p class="summary-card-title">tags</p>
-            <p class="summary-card-body">50</p>
+            <p class="summary-card-body">{{ $totalTags }}</p>
             </div>
         </div>
         </div>

@@ -16,10 +16,10 @@
             </li>
         @endauth
         <li class="nav-list">
-          <a href="./pages/posts.html" class="nav-link">posts</a>
+          <a href="{{ route('post.index') }}" class="nav-link">posts</a>
         </li>
         <li class="nav-list">
-          <a href="{{ route('general.tag.index') }}" class="nav-link">tags</a>
+          <a href="{{ route('tag.index') }}" class="nav-link">tags</a>
         </li>
         @guest
         <li class="nav-list">
