@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -32,7 +34,47 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // Validate post title and content passed from user's input form
+        $request->validate([
+            'title' => ['required'],
+            'content' => ['required'],
+        ]);
+
+        // Validate tags passed from user's input form
+        $$request->validate([
+            'names' => ['required'],
+        ]);
+
+        // Store post to Post model
+        $post = Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => Auth::id(),
+        ]);
+
+        // Store respective tags to pivot table
+        $post->tags()->sync($request->names);
+
+        // Store post image to Image model
+        // check if image passed from user's input
+        if($request->file('image')) {
+            // Get image extension
+            $imageExtension = $request->file('image')->extension();
+            // Set image name with extenxion
+            $image = $post->slug . '.' . $imageExtension;
+
+            // Store image to Image model
+            Image::create([
+                'name' => $image,
+                'imageable_type' => Post::class,
+                'imageable_id' => $post->id,
+            ]);
+
+            // Store image to disk
+            $request->file('image')->storeAs('posts', $image, ['public']);
+        }
+
+        return redirect(route('admin.dashboard'));
     }
 
     /**

@@ -75,4 +75,13 @@ class TagController extends Controller
     {
         //
     }
+
+    // Tags for general tag page
+    public function tagsIndex() {
+        $tags = Tag::get();
+
+        return view('general.tag.index')->with([
+            'tags' => $tags,
+        ]);
+    }
 }

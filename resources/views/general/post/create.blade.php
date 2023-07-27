@@ -3,8 +3,12 @@
 @section('content')
 <div class="card card--wrapper post-form">
     <h1 class="card-header">create a post</h1>
-    <form action="{{ route('post.store') }}" method="POST">
-        @csrf
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            {{ $error }}
+        @endforeach
+    @endif
+    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">title</label>
             <input
@@ -12,6 +16,7 @@
                 name="title"
                 id="title"
                 placeholder="Enter a title for your post."
+                value="{{ old('title') }}"
             />
         </div>
         <div class="form-group">
@@ -25,7 +30,7 @@
                 id="content"
                 rows="10"
                 placeholder="Enter content for your post."
-            ></textarea>
+            >{{ old('content') }}</textarea>
         </div>
 
         <!-- <div class="form-group">
@@ -44,6 +49,7 @@
                     type="checkbox"
                     name="names[]"
                     id="myCheckboxId-{{ $tag->id }}"
+                    value="{{ $tag->id }}"
                 />
                 <div class="checkbox-box"></div>
                 {{ $tag->name }}
@@ -54,6 +60,7 @@
         </div>
         <!-- END CHECKBOX -->
         <button class="btn btn--create">Create</button>
+        @csrf
     </form>
 </div>
 @endsection
