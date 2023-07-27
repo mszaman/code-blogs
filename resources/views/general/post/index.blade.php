@@ -21,9 +21,10 @@
             >{{ $post->user->first_name }} {{ $post->user->last_name }}</a
           >
         </div>
-        <div class="post-body">{{ $post->content }}</div>
+        <div class="post-body">{{ Str::limit($post->content, 100, $end='...') }}</div>
       </div>
     </div>
     @endforeach
 </div>
 @endsection
+
