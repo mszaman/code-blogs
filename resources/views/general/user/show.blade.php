@@ -51,7 +51,7 @@
                 </td>
                 <td class="action-cell">
                 <a href="{{ route('post.show', $post->slug) }}" class="btn btn--view">View</a>
-                <a href="./edit-post.html" class="btn btn--edit">Edit</a>
+                <a href="{{ route('post.edit', $post->slug) }}" class="btn btn--edit">Edit</a>
                 <form action="">
                     <button class="btn btn--delete">Delete</button>
                 </form>
