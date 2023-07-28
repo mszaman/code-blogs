@@ -7,7 +7,7 @@
       <img src="{{ asset('storage/posts/'. $post->image->name) }}" alt="" class="post-image" />
       <div class="post">
         <h1 class="post-title">
-            <a href=""
+            <a href="{{ route('post.show', $post->slug) }}"
             >{{ $post->title }}</a
           >
         </h1>

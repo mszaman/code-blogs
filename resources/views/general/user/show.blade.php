@@ -2,7 +2,7 @@
 
 @section('content')
 <aside class="card profile-info">
-    <img src="{{ asset('storage/avatars/'.$image) }}" alt="" class="profile-image" />
+    <img src="{{ isset($user->image->name) ? asset('storage/avatars/'.$user->image->name) : asset('storage/avatars/default-user.jpg') }}" alt="" class="profile-image" />
 
     <h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
     <ul class="profile-info-lists">
@@ -40,25 +40,24 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($user->posts as $post)
             <tr>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing</td>
-                <td>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
-                quasi perspiciatis, magni corporis nulla error quo nesciunt
-                impedit veritatis delectus!
-                </td>
+                <td>{{ $post->title }}</td>
+                <td>{{ Str::limit($post->content, 50, '...') }}</td>
                 <td class="cell-tag">
-                <a class="tag" href="../pages/index-tag.html">laravel</a>,
-                <a class="tag" href="../pages/index-tag.html">PHP</a>
+                @foreach ($post->tags as $tag)
+                <a class="tag" href="../pages/index-tag.html">{{ $tag->name }}</a>,
+                @endforeach
                 </td>
                 <td class="action-cell">
-                <a href="./show-post.html" class="btn btn--view">View</a>
+                <a href="{{ route('post.show', $post->slug) }}" class="btn btn--view">View</a>
                 <a href="./edit-post.html" class="btn btn--edit">Edit</a>
                 <form action="">
                     <button class="btn btn--delete">Delete</button>
                 </form>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </section>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Contact;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,11 +44,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $image = $user->image->name ?? 'default-user.jpg';
-
         return view('general.user.show')->with([
             'user' => $user,
-            'image' => $image,
         ]);
     }
 

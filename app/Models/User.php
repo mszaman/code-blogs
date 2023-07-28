@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,6 +70,10 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    // Relation with Post model
+    public function posts() : HasMany {
+        return $this->hasMany(Post::class);
+    }
 
     // composer require spatie/laravel-sluggable
     /**
