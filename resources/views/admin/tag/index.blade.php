@@ -17,7 +17,7 @@
                 <tr>
                 <td>{{ $tag->name }}</td>
                 <td class="action-cell">
-                    <a href="#" class="btn btn--view"
+                    <a href="{{ route('tag.show', $tag->name) }}" class="btn btn--view"
                     >View</a
                     >
                     <a

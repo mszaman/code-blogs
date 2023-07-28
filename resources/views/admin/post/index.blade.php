@@ -23,7 +23,7 @@
             </td>
             <td class="cell-tag">
               @foreach ($post->tags as $tag)
-              <a class="tag" href="">{{ $tag->name }}</a>,
+              <a class="tag" href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>,
               @endforeach
             </td>
             <td class="action-cell">

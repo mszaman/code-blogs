@@ -46,7 +46,7 @@
                 <td>{{ Str::limit($post->content, 50, '...') }}</td>
                 <td class="cell-tag">
                 @foreach ($post->tags as $tag)
-                <a class="tag" href="../pages/index-tag.html">{{ $tag->name }}</a>,
+                <a class="tag" href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>,
                 @endforeach
                 </td>
                 <td class="action-cell">

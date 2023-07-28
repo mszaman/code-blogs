@@ -43,7 +43,9 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        return view('general.tag.show')->with([
+            'tag' => $tag,
+        ]);
     }
 
     /**

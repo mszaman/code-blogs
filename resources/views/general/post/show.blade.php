@@ -25,7 +25,7 @@
             </div>
             <div class="tags post-tags">
               @foreach ($post->tags as $tag)
-              <a href="../pages/index-tag.html" class="post-tag">{{ $tag->name }}</a>
+              <a href="{{ route('tag.show', $tag->name) }}" class="post-tag">{{ $tag->name }}</a>
               @endforeach
             </div>
             <div class="post-body">{{ $post->content }}</div>
@@ -149,7 +149,7 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
               @foreach ($tags as $tag)
-              <a href="../pages/index-tag.html">{{ $tag->name }}</a>
+              <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
               @endforeach
             </div>
           </div>
@@ -157,7 +157,7 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
                 @foreach ($tags as $tag)
-                <a href="../pages/index-tag.html">{{ $tag->name }}</a>
+                <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
                 @endforeach
             </div>
           </div>
@@ -165,7 +165,7 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
                 @foreach ($tags as $tag)
-                <a href="../pages/index-tag.html">{{ $tag->name }}</a>
+                <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
                 @endforeach
             </div>
           </div>
