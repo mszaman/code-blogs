@@ -23,41 +23,55 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 // Auth Routes
-Route::get('signup', [AuthController::class, 'getSignupForm'])->name('auth.signup');
-Route::post('signup', [AuthController::class, 'registerUser'])->name('auth.register');
-Route::get('signin', [AuthController::class, 'getSigninForm'])->name('auth.signin');
-Route::post('signin', [AuthController::class, 'signingInUser'])->name('auth.signin');
-Route::get('signout', [AuthController::class, 'signout'])->name('auth.signout');
+Route::as('auth.')->group(function(){
+    Route::get('signup', [AuthController::class, 'getSignupForm'])->name('signup');
+    Route::post('signup', [AuthController::class, 'registerUser'])->name('register');
+    Route::get('signin', [AuthController::class, 'getSigninForm'])->name('signin');
+    Route::post('signin', [AuthController::class, 'signingInUser'])->name('signin');
+    Route::get('signout', [AuthController::class, 'signout'])->name('signout')->middleware(['auth']);
+});
+
 
 // Admin Dashboard
-Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function(){
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('post/index', [PostController::class, 'adminIndex'])->name('post.index');
+    Route::get('tag/tags', [TagController::class, 'adminIndex'])->name('tag.index');
+});
 
 // User Routes
-Route::get('user/index', [UserController::class, 'index'])->name('user.index');
-Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::get('user/{user}', [UserController::class, 'show'])->name('user.show');
-Route::patch('user/{user}', [UserController::class, 'update'])->name('user.update');
+Route::prefix('user')->as('user.')->middleware(['auth'])->group(function(){
+    Route::get('index', [UserController::class, 'index'])->name('index');
+    Route::get('{user}/edit', [UserController::class, 'edit'])->name('edit');
+    Route::get('{user}', [UserController::class, 'show'])->name('show');
+    Route::patch('{user}', [UserController::class, 'update'])->name('update');
+});
 
 // Post Routes
-Route::get('post/index', [PostController::class, 'index'])->name('post.index');
-Route::get('post/create', [PostController::class, 'create'])->name('post.create');
-Route::post('post/store', [PostController::class, 'store'])->name('post.store');
-Route::get('post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
-Route::get('post/{post}', [PostController::class, 'show'])->name('post.show');
-Route::patch('post/{post}', [PostController::class, 'update'])->name('post.update');
-
-Route::get('admin/post/index', [PostController::class, 'adminIndex'])->name('admin.post.index');
-
+Route::as('post.')->prefix('post')->group(function(){
+    Route::middleware(['auth'])->group(function(){
+        Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/store', [PostController::class, 'store'])->name('store');
+        Route::get('/{post}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::patch('/{post}', [PostController::class, 'update'])->name('update');
+    });
+    Route::get('/index', [PostController::class, 'index'])->name('index');
+    Route::get('/{post}', [PostController::class, 'show'])->name('show');
+});
 
 // Comment Routes
-Route::post('comment/{post}', [CommentController::class, 'store'])->name('comment.store');
+Route::post('comment/{post}', [CommentController::class, 'store'])->name('comment.store')->middleware(['auth']);
 
 // Tag Routes
-Route::get('tag/index',[TagController::class, 'index'])->name('tag.index');
-Route::get('tag/create',[TagController::class, 'create'])->name('tag.create');
-Route::post('tag/store',[TagController::class, 'store'])->name('tag.store');
-Route::get('tag/{tag}/edit',[TagController::class, 'edit'])->name('tag.edit');
-Route::get('tag/{tag}', [TagController::class, 'show'])->name('tag.show');
-Route::patch('tag/{tag}',[TagController::class, 'update'])->name('tag.update');
+Route::prefix('tag')->as('tag.')->group(function(){
+    Route::middleware(['auth'])->group(function(){
+        Route::get('/create',[TagController::class, 'create'])->name('create');
+        Route::post('/store',[TagController::class, 'store'])->name('store');
+        Route::get('/{tag}/edit',[TagController::class, 'edit'])->name('edit');
+        Route::patch('/{tag}',[TagController::class, 'update'])->name('update');
+    });
+    Route::get('/index',[TagController::class, 'index'])->name('index');
+    Route::get('/{tag}', [TagController::class, 'show'])->name('show');
+});
 
-Route::get('admin/tag/tags', [TagController::class, 'adminIndex'])->name('admin.tag.index');
+
