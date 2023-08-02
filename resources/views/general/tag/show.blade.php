@@ -21,11 +21,11 @@
                     alt="Author Image"
                     class="author-image"
                     />
-                    <a href="../pages/profile.html" class="author-name"
-                    >{{ $post->user->name }}</a
+                    <a href="{{ route('user.show', $post->user->slug) }}" class="author-name"
+                    >{{ $post->user->first_name }} {{ $post->user->last_name }}</a
                     >
                 </div>
-                <div class="post-body">{{ $post->content }}</div>
+                <div class="post-body">{{ Str::limit($post->content, 150, '...') }}</div>
                 </div>
             </div>
             @endforeach

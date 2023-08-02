@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->unsignedBigInteger('role_id')->default(1);
+            $table->unsignedBigInteger('role_id')->default(2);
             $table->string('first_name');
             $table->string('last_name');
             $table->string('slug')->unique();

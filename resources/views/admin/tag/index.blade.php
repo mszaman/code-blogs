@@ -17,11 +17,11 @@
                 <tr>
                 <td>{{ $tag->name }}</td>
                 <td class="action-cell">
-                    <a href="{{ route('tag.show', $tag->name) }}" class="btn btn--view"
+                    <a href="{{ route('tag.show', $tag->slug) }}" class="btn btn--view"
                     >View</a
                     >
                     <a
-                    href="{{ route('tag.edit', $tag->id) }}"
+                    href="{{ route('tag.edit', $tag->slug) }}"
                     class="btn btn--edit"
                     >Edit</a
                     >

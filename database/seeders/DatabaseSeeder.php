@@ -24,15 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // Role::create([
-        //     'name'=> 'user',
-        // ]);
-        // Role::create([
-        //     'name'=> 'admin',
-        // ]);
-        // Role::create([
-        //     'name'=> 'editor',
-        // ]);
+        Role::create([
+            'name'=> 'admin',
+        ]);
+        Role::create([
+            'name'=> 'blogger',
+        ]);
 
         // City::create([
         //     'name'=> 'dhaka',
@@ -67,14 +64,14 @@ class DatabaseSeeder extends Seeder
         // City::create([
         //     'name'=> 'munshiganj',
         // ]);
-        // User::create([
-        //     'first_name'=> 'Sayed',
-        //     'last_name'=> 'Zaman',
-        //     'role_id'=> 2,
-        //     'slug'=>'sayed-zaman',
-        //     'email'=>'zaman@test.com',
-        //     'password'=> bcrypt('zaman123'),
-        // ]);
+        User::create([
+            'first_name'=> 'Sayed',
+            'last_name'=> 'Zaman',
+            'role_id'=> 1,
+            'slug'=>'sayed-zaman',
+            'email'=>'zaman@test.com',
+            'password'=> bcrypt('zaman123'),
+        ]);
         // User::create([
         //     'first_name'=> 'Sifat',
         //     'last_name'=> 'Hossain',

@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    // Relation with Comment model
+    public function comments() : HasMany {
+        return $this->hasMany(Comment::class);
+    }
+
     // composer require spatie/laravel-sluggable
     /**
      * Get the options for generating the slug.

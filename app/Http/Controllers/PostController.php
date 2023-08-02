@@ -79,7 +79,7 @@ class PostController extends Controller
             $request->file('image')->storeAs('posts', $image, ['public']);
         }
 
-        return redirect(route('admin.dashboard'));
+        return redirect(route('user.show', $post->user->slug));
     }
 
     /**

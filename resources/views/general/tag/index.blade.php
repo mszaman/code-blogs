@@ -5,8 +5,8 @@
     <h1 class="card-header">all tags</h1>
     <div class="tags">
         @foreach ($tags as $tag)
-            <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
+            <a href="{{ route('tag.show', $tag->slug) }}">{{ $tag->name }}</a>
         @endforeach
     </div>
-  </div>
+</div>
 @endsection

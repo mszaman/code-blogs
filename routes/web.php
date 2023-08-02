@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -46,6 +47,10 @@ Route::get('post/{post}', [PostController::class, 'show'])->name('post.show');
 Route::patch('post/{post}', [PostController::class, 'update'])->name('post.update');
 
 Route::get('admin/post/index', [PostController::class, 'adminIndex'])->name('admin.post.index');
+
+
+// Comment Routes
+Route::post('comment/{post}', [CommentController::class, 'store'])->name('comment.store');
 
 // Tag Routes
 Route::get('tag/index',[TagController::class, 'index'])->name('tag.index');

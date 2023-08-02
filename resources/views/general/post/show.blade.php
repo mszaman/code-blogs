@@ -25,7 +25,7 @@
             </div>
             <div class="tags post-tags">
               @foreach ($post->tags as $tag)
-              <a href="{{ route('tag.show', $tag->name) }}" class="post-tag">{{ $tag->name }}</a>
+              <a href="{{ route('tag.show', $tag->slug) }}" class="post-tag">{{ $tag->name }}</a>
               @endforeach
             </div>
             <div class="post-body">{{ $post->content }}</div>
@@ -38,7 +38,7 @@
             <!-- Comment Form -->
             <div class="create-comment">
               <h1 class="comment-header">Leave a comment</h1>
-              <form action="" class="comment-form">
+              <form action="{{ route('comment.store', $post->slug) }}" method="POST" class="comment-form" >
                 <textarea
                   name="comment"
                   id="comment"
@@ -48,92 +48,31 @@
                 <button type="submit" class="btn btn--create">
                   Add Comment
                 </button>
+                @csrf
               </form>
             </div>
             <!-- End Comment Form -->
             <!-- All Comments -->
             <div class="comments">
               <h1 class="comment-header">Comments</h1>
-              <!-- Single Comment -->
+              @foreach ($post->comments as $comment)
+                  <!-- Single Comment -->
               <div class="comment-box">
                 <div class="comment-info">
                   <img
-                    src="../res/profile-image.jpg"
+                    src="{{ isset($comment->user->image->name) ? asset('storage/avatars/'.$comment->user->image->name) : asset('storage/avatars/default-user.jpg') }}"
                     alt=""
                     class="author-image"
                   />
-                  <a href="../pages/profile.html" class="author-name"
-                    >respected blogger</a
+                  <a href="{{ route('user.show', $comment->user->slug) }}" class="author-name"
+                    >{{ $comment->user->first_name }} {{ $comment->user->last_name }}</a
                   >
-                  <p class="date">Jul/3/2050</p>
+                  <p class="date">{{ $comment->created_at }}</p>
                 </div>
-                <p class="comment-body">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Commodi earum obcaecati excepturi voluptatem ut voluptatum
-                  dolorem, exercitationem at nemo facilis.
-                </p>
+                <p class="comment-body">{{ $comment->comment }}</p>
               </div>
               <!-- End Single Comment -->
-              <!-- Single Comment -->
-              <div class="comment-box">
-                <div class="comment-info">
-                  <img
-                    src="../res/profile-image.jpg"
-                    alt=""
-                    class="author-image"
-                  />
-                  <a href="../pages/profile.html" class="author-name"
-                    >respected blogger</a
-                  >
-                  <p class="date">Jul/3/2050</p>
-                </div>
-                <p class="comment-body">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Commodi earum obcaecati excepturi voluptatem ut voluptatum
-                  dolorem, exercitationem at nemo facilis.
-                </p>
-              </div>
-              <!-- End Single Comment -->
-              <!-- Single Comment -->
-              <div class="comment-box">
-                <div class="comment-info">
-                  <img
-                    src="../res/profile-image.jpg"
-                    alt=""
-                    class="author-image"
-                  />
-                  <a href="../pages/profile.html" class="author-name"
-                    >respected blogger</a
-                  >
-                  <p class="date">Jul/3/2050</p>
-                </div>
-                <p class="comment-body">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Commodi earum obcaecati excepturi voluptatem ut voluptatum
-                  dolorem, exercitationem at nemo facilis.
-                </p>
-              </div>
-              <!-- End Single Comment -->
-              <!-- Single Comment -->
-              <div class="comment-box">
-                <div class="comment-info">
-                  <img
-                    src="../res/profile-image.jpg"
-                    alt=""
-                    class="author-image"
-                  />
-                  <a href="../pages/profile.html" class="author-name"
-                    >respected blogger</a
-                  >
-                  <p class="date">Jul/3/2050</p>
-                </div>
-                <p class="comment-body">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Commodi earum obcaecati excepturi voluptatem ut voluptatum
-                  dolorem, exercitationem at nemo facilis.
-                </p>
-              </div>
-              <!-- End Single Comment -->
+              @endforeach
             </div>
             <!-- End All Comments -->
           </div>
@@ -149,7 +88,7 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
               @foreach ($tags as $tag)
-              <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
+              <a href="{{ route('tag.show', $tag->slug) }}">{{ $tag->name }}</a>
               @endforeach
             </div>
           </div>
@@ -157,7 +96,7 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
                 @foreach ($tags as $tag)
-                <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
+                <a href="{{ route('tag.show', $tag->slug) }}">{{ $tag->name }}</a>
                 @endforeach
             </div>
           </div>
@@ -165,11 +104,13 @@
             <h2 class="sidebar-header">tags</h2>
             <div class="tags sidebar-content">
                 @foreach ($tags as $tag)
-                <a href="{{ route('tag.show', $tag->name) }}">{{ $tag->name }}</a>
+                <a href="{{ route('tag.show', $tag->slug) }}">{{ $tag->name }}</a>
                 @endforeach
             </div>
           </div>
         </div>
       </aside>
       <!-- End Sidebar -->
+
+
 @endsection

@@ -35,7 +35,7 @@ class TagController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect(route('tag.index'));
+        return redirect(route('admin.tag.index'));
     }
 
     /**
